@@ -90,5 +90,5 @@ javadoc {
 apply from: "$rootDir/gradle/maven-publish.gradle"
 
 wrapper {
-    gradleVersion = '2.11'
+    gradleVersion = '2.14.1'
 }
