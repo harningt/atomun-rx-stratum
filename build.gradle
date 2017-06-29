@@ -23,7 +23,6 @@ release {
 
 repositories {
     jcenter()
-    mavenCentral()
 }
 
 dependencies {
