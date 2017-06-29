@@ -1,7 +1,6 @@
 package us.eharning.atomun.rx.stratum;
 
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Flowable;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -11,7 +10,6 @@ import java.io.Writer;
  */
 public abstract class MessageConnection implements StratumConnection {
     private StratumMessageCodec messageCodec = new StratumMessageCodec();
-    private final StringToMessageMapper stringToMessageMapper = new StringToMessageMapper();
 
     protected abstract Writer beginMessage() throws IOException;
 
@@ -28,18 +26,9 @@ public abstract class MessageConnection implements StratumConnection {
         finishMessage(writer);
     }
 
-    protected abstract Observable<String> getMessageStrings();
-    protected Observable<StratumMessage> getMessages() {
-        return getMessageStrings().map(stringToMessageMapper);
-    }
+    protected abstract Flowable<String> getMessageStrings();
 
-    private class StringToMessageMapper implements Func1<String, StratumMessage> {
-        @Override
-        public StratumMessage call(String s) {
-            if (s == null) {
-                return null;
-            }
-            return messageCodec.decodeMessage(s);
-        }
+    protected Flowable<StratumMessage> getMessages() {
+        return getMessageStrings().map(s -> (s == null) ? null : messageCodec.decodeMessage(s));
     }
 }

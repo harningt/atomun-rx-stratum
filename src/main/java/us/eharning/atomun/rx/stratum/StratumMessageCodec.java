@@ -14,8 +14,6 @@ import java.util.concurrent.atomic.AtomicLong;
 public class StratumMessageCodec {
     private static final Gson gson = new Gson();
     private static final AtomicLong counter = new AtomicLong();
-    public String method;
-    public Object[] parameters;
 
     public void encodeMessage(Writer writer, StratumMessage message) throws IOException {
         long id = counter.getAndIncrement();

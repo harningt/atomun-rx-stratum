@@ -1,13 +1,13 @@
 package us.eharning.atomun.rx.stratum;
 
-import rx.Observable;
+import io.reactivex.Flowable;
 
 /**
  * Created by harningt on 2/29/16.
  */
 public interface StratumConnection {
-    Observable<StratumConnectionEvent> getConnectionEvents();
+    Flowable<StratumConnectionEvent> getConnectionEvents();
 
-    Observable<StratumMessage> sendMessage(StratumMessage request);
-    Observable<StratumMessage> subscribe(StratumMessage request);
+    Flowable<StratumMessage> sendMessage(StratumMessage request);
+    Flowable<StratumMessage> subscribe(StratumMessage request);
 }
