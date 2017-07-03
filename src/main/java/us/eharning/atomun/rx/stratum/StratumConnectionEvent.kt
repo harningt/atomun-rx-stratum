@@ -13,16 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package us.eharning.atomun.rx.stratum;
-
-import io.reactivex.Flowable;
+package us.eharning.atomun.rx.stratum
 
 /**
  * Created by harningt on 2/29/16.
  */
-public interface StratumConnection {
-    Flowable<StratumConnectionEvent> getConnectionEvents();
-
-    Flowable<StratumMessage> sendMessage(StratumMessage request);
-    Flowable<StratumMessage> subscribe(StratumMessage request);
+enum class StratumConnectionEvent {
+    Connected,
+    Disconnected
 }
